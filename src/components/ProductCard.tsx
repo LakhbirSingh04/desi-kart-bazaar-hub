@@ -113,19 +113,6 @@ const ProductCard = ({
             )}
           </div>
 
-          {/* Add to Cart Button */}
-          <button
-            onClick={handleAddToCart}
-            disabled={!inStock}
-            className={`w-full py-2 px-4 rounded-md font-medium transition-colors flex items-center justify-center space-x-2 ${
-              inStock
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                : 'bg-muted text-muted-foreground cursor-not-allowed'
-            }`}
-          >
-            <ShoppingCart className="w-4 h-4" />
-            <span>{inStock ? 'Add to Cart' : 'Out of Stock'}</span>
-          </button>
         </div>
       </Link>
     </div>

@@ -126,163 +126,147 @@ const Home = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <div className="w-full lg:w-64 space-y-6">
-            <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="font-semibold mb-4 flex items-center">
-                <Filter className="w-5 h-5 mr-2" />
-                Filters
-              </h3>
-              
-              {/* Category Filter */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Category</label>
+        {/* Horizontal Filter Bar */}
+        <div className="bg-card border border-border rounded-lg p-4 mb-8 overflow-x-auto">
+          <div className="flex items-center space-x-6 min-w-max">
+            <div className="flex items-center">
+              <Filter className="w-4 h-4 mr-2 text-muted-foreground" />
+              <span className="text-sm font-medium whitespace-nowrap">Filters:</span>
+            </div>
+            
+            {/* Category Filter */}
+            <select
+              value={filters.category}
+              onChange={(e) => setFilters({...filters, category: e.target.value})}
+              className="px-3 py-2 border border-border rounded-md bg-background text-sm min-w-[120px]"
+            >
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+
+            {/* Price Range */}
+            <select
+              value={filters.priceRange}
+              onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
+              className="px-3 py-2 border border-border rounded-md bg-background text-sm min-w-[140px]"
+            >
+              <option value="">All Prices</option>
+              <option value="0-5000">Under ₹5,000</option>
+              <option value="5000-10000">₹5,000 - ₹10,000</option>
+              <option value="10000-25000">₹10,000 - ₹25,000</option>
+              <option value="25000-50000">₹25,000 - ₹50,000</option>
+              <option value="50000+">Above ₹50,000</option>
+            </select>
+
+            {/* Brand Filter */}
+            <select
+              value={filters.brand}
+              onChange={(e) => setFilters({...filters, brand: e.target.value})}
+              className="px-3 py-2 border border-border rounded-md bg-background text-sm min-w-[120px]"
+            >
+              {brands.map(brand => (
+                <option key={brand} value={brand}>{brand}</option>
+              ))}
+            </select>
+
+            {/* Rating Filter */}
+            <select
+              value={filters.rating}
+              onChange={(e) => setFilters({...filters, rating: e.target.value})}
+              className="px-3 py-2 border border-border rounded-md bg-background text-sm min-w-[120px]"
+            >
+              <option value="">All Ratings</option>
+              <option value="4+">4★ & above</option>
+              <option value="3+">3★ & above</option>
+              <option value="2+">2★ & above</option>
+            </select>
+
+            {/* Discount Filter */}
+            <label className="flex items-center whitespace-nowrap">
+              <input
+                type="checkbox"
+                checked={filters.discount}
+                onChange={(e) => setFilters({...filters, discount: e.target.checked})}
+                className="mr-2"
+              />
+              <span className="text-sm font-medium">On Sale</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Products Section */}
+        <div>
+          {/* Toolbar */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <h2 className="text-2xl font-bold">
+              Featured Products ({products.length} items)
+            </h2>
+            
+            <div className="flex items-center gap-4">
+              {/* Sort By */}
+              <div className="flex items-center">
+                <label className="text-sm font-medium mr-2">Sort by:</label>
                 <select
-                  value={filters.category}
-                  onChange={(e) => setFilters({...filters, category: e.target.value})}
-                  className="w-full p-2 border border-border rounded-md bg-background"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="p-2 border border-border rounded-md bg-background"
                 >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
+                  <option value="popularity">Popularity</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Customer Rating</option>
+                  <option value="newest">Newest First</option>
                 </select>
               </div>
 
-              {/* Price Range */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Price Range</label>
-                <select
-                  value={filters.priceRange}
-                  onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
-                  className="w-full p-2 border border-border rounded-md bg-background"
+              {/* View Mode */}
+              <div className="flex border border-border rounded-md">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-background'}`}
                 >
-                  <option value="">All Prices</option>
-                  <option value="0-5000">Under ₹5,000</option>
-                  <option value="5000-10000">₹5,000 - ₹10,000</option>
-                  <option value="10000-25000">₹10,000 - ₹25,000</option>
-                  <option value="25000-50000">₹25,000 - ₹50,000</option>
-                  <option value="50000+">Above ₹50,000</option>
-                </select>
-              </div>
-
-              {/* Brand Filter */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Brand</label>
-                <select
-                  value={filters.brand}
-                  onChange={(e) => setFilters({...filters, brand: e.target.value})}
-                  className="w-full p-2 border border-border rounded-md bg-background"
+                  <Grid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-background'}`}
                 >
-                  {brands.map(brand => (
-                    <option key={brand} value={brand}>{brand}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Rating Filter */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Customer Rating</label>
-                <select
-                  value={filters.rating}
-                  onChange={(e) => setFilters({...filters, rating: e.target.value})}
-                  className="w-full p-2 border border-border rounded-md bg-background"
-                >
-                  <option value="">All Ratings</option>
-                  <option value="4+">4★ & above</option>
-                  <option value="3+">3★ & above</option>
-                  <option value="2+">2★ & above</option>
-                </select>
-              </div>
-
-              {/* Discount Filter */}
-              <div className="mb-6">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={filters.discount}
-                    onChange={(e) => setFilters({...filters, discount: e.target.checked})}
-                    className="mr-2"
-                  />
-                  <span className="text-sm font-medium">On Sale Only</span>
-                </label>
+                  <List className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Products Section */}
-          <div className="flex-1">
-            {/* Toolbar */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-              <h2 className="text-2xl font-bold">
-                Featured Products ({products.length} items)
-              </h2>
-              
-              <div className="flex items-center gap-4">
-                {/* Sort By */}
-                <div className="flex items-center">
-                  <label className="text-sm font-medium mr-2">Sort by:</label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="p-2 border border-border rounded-md bg-background"
-                  >
-                    <option value="popularity">Popularity</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Customer Rating</option>
-                    <option value="newest">Newest First</option>
-                  </select>
-                </div>
+          {/* Products Grid */}
+          <div className={`grid gap-6 ${
+            viewMode === 'grid' 
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+              : 'grid-cols-1'
+          }`}>
+            {products.map(product => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+          </div>
 
-                {/* View Mode */}
-                <div className="flex border border-border rounded-md">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                    className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-background'}`}
-                  >
-                    <Grid className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`p-2 ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-background'}`}
-                  >
-                    <List className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className={`grid gap-6 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
-                : 'grid-cols-1'
-            }`}>
-              {products.map(product => (
-                <ProductCard key={product.id} {...product} />
-              ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center mt-12">
-              <div className="flex items-center space-x-2">
-                <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
-                  Previous
-                </button>
-                <button className="px-3 py-2 bg-primary text-primary-foreground rounded-md">
-                  1
-                </button>
-                <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
-                  2
-                </button>
-                <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
-                  3
-                </button>
-                <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
-                  Next
-                </button>
-              </div>
+          {/* Pagination */}
+          <div className="flex justify-center mt-12">
+            <div className="flex items-center space-x-2">
+              <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
+                Previous
+              </button>
+              <button className="px-3 py-2 bg-primary text-primary-foreground rounded-md">
+                1
+              </button>
+              <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
+                2
+              </button>
+              <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
+                3
+              </button>
+              <button className="px-3 py-2 border border-border rounded-md hover:bg-muted">
+                Next
+              </button>
             </div>
           </div>
         </div>
