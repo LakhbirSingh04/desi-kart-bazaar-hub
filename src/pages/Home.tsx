@@ -13,113 +13,115 @@ const Home = () => {
     discount: false
   });
 
-  // Dummy product data
+  // Men's fashion product data
   const products = [
     {
       id: '1',
-      title: 'Samsung Galaxy S24 Ultra 5G (Titanium Gray, 256GB)',
-      price: 124999,
-      originalPrice: 134999,
-      image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500',
-      rating: 4.5,
-      reviews: 2547,
-      discount: 7,
+      title: 'Oversized Cotton Shirt',
+      price: 2499,
+      originalPrice: 3999,
+      image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500',
+      rating: 4.8,
+      reviews: 347,
+      discount: 38,
       isBestseller: true,
       inStock: true
     },
     {
       id: '2',
-      title: 'Apple MacBook Air M2 Chip (13-inch, 8GB RAM, 256GB SSD)',
-      price: 89999,
-      originalPrice: 119999,
-      image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500',
-      rating: 4.7,
-      reviews: 1823,
-      discount: 25,
-      isBestseller: true,
+      title: 'Slim Fit Denim Jeans',
+      price: 3999,
+      originalPrice: 5999,
+      image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500',
+      rating: 4.6,
+      reviews: 523,
+      discount: 33,
       inStock: true
     },
     {
       id: '3',
-      title: 'Sony WH-1000XM5 Wireless Noise Canceling Headphones',
-      price: 29990,
-      originalPrice: 34990,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
-      rating: 4.6,
-      reviews: 945,
-      discount: 14,
+      title: 'Premium Leather Jacket',
+      price: 12999,
+      originalPrice: 19999,
+      image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500',
+      rating: 4.9,
+      reviews: 189,
+      discount: 35,
+      isBestseller: true,
       inStock: true
     },
     {
       id: '4',
-      title: 'Nike Air Max 270 React Men\'s Running Shoes',
-      price: 12995,
-      originalPrice: 14995,
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500',
-      rating: 4.3,
-      reviews: 567,
-      discount: 13,
-      inStock: false
+      title: 'Casual Polo T-Shirt',
+      price: 1299,
+      originalPrice: 1999,
+      image: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500',
+      rating: 4.4,
+      reviews: 692,
+      discount: 35,
+      inStock: true
     },
     {
       id: '5',
-      title: 'LG 55" 4K Ultra HD Smart OLED TV (OLED55C3PSA)',
-      price: 149999,
-      originalPrice: 199999,
-      image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500',
-      rating: 4.4,
-      reviews: 234,
-      discount: 25,
+      title: 'Formal White Shirt',
+      price: 2799,
+      originalPrice: 3999,
+      image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500',
+      rating: 4.7,
+      reviews: 445,
+      discount: 30,
       inStock: true
     },
     {
       id: '6',
-      title: 'Canon EOS R6 Mark II Mirrorless Camera with 24-105mm Lens',
-      price: 239999,
-      originalPrice: 269999,
-      image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=500',
-      rating: 4.8,
-      reviews: 156,
-      discount: 11,
-      isBestseller: true,
-      inStock: true
+      title: 'Cargo Pants',
+      price: 3499,
+      originalPrice: 4999,
+      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500',
+      rating: 4.5,
+      reviews: 278,
+      discount: 30,
+      inStock: false
     }
   ];
 
   const categories = [
-    'All Categories', 'Electronics', 'Fashion', 'Home & Kitchen', 
-    'Books', 'Sports', 'Beauty', 'Automotive'
+    'All', 'Shirts', 'T-Shirts', 'Jeans', 'Jackets', 'Formal Wear', 'Casual Wear', 'Accessories'
   ];
 
   const brands = [
-    'All Brands', 'Samsung', 'Apple', 'Sony', 'Nike', 
-    'LG', 'Canon', 'OnePlus', 'Xiaomi'
+    'All Brands', 'Zara', 'H&M', 'Uniqlo', 'Nike', 'Adidas', 'Levi\'s', 'Tommy Hilfiger'
   ];
 
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-primary/10 to-accent/10 py-16">
+      <div className="relative bg-background py-24 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Shop Smart, Shop <span className="text-primary">ShopKart</span>
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
+              Elevate Your
+              <span className="block font-semibold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                Style
+              </span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Discover amazing deals on electronics, fashion, and more!
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 font-light">
+              Discover premium menswear that defines modern masculinity
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <span className="bg-primary text-primary-foreground px-6 py-2 rounded-full">
-                ✨ Free Delivery Above ₹499
-              </span>
-              <span className="bg-accent text-accent-foreground px-6 py-2 rounded-full">
-                🚀 Same Day Delivery Available
-              </span>
-              <span className="bg-warning text-warning-foreground px-6 py-2 rounded-full">
-                💰 Up to 70% Off
-              </span>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 mb-16">
+              <button className="bg-primary text-primary-foreground px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary/90 transition-all duration-300">
+                SHOP NEW ARRIVALS
+              </button>
+              <button className="border border-primary text-primary px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                VIEW COLLECTIONS
+              </button>
             </div>
           </div>
+        </div>
+        {/* Decorative elements */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-muted/10 rounded-full blur-3xl"></div>
         </div>
       </div>
 

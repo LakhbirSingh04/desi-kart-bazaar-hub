@@ -7,61 +7,57 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
-    'Electronics', 'Fashion', 'Home & Kitchen', 'Books', 'Sports', 'Beauty'
+    'New Arrivals', 'Shirts', 'T-Shirts', 'Jeans', 'Jackets', 'Formal', 'Accessories', 'Sale'
   ];
 
   return (
-    <nav className="bg-card border-b border-border sticky top-0 z-50">
-      {/* Top bar */}
-      <div className="bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center text-sm">
-            <span>Free delivery on orders above ₹499</span>
-            <div className="flex items-center space-x-4">
-              <span>📞 1800-123-4567</span>
-              <span>Track Your Order</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <nav className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
       {/* Main navbar */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-6">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-primary">
-            ShopKart
+          <Link to="/" className="text-2xl font-light tracking-wider text-foreground">
+            VESTON
           </Link>
 
-          {/* Search bar */}
-          <div className="flex-1 max-w-2xl mx-8">
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for products, brands and more..."
-                className="w-full px-4 py-3 bg-muted rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            </div>
+          {/* Navigation Links - Desktop */}
+          <div className="hidden md:flex items-center space-x-8">
+            {categories.map((category) => (
+              <Link
+                key={category}
+                to={`/category/${category.toLowerCase().replace(' ', '-')}`}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase"
+              >
+                {category}
+              </Link>
+            ))}
           </div>
 
           {/* Right side icons */}
           <div className="flex items-center space-x-6">
-            <Link to="/account" className="flex flex-col items-center hover:text-primary transition-colors">
-              <User className="w-6 h-6" />
-              <span className="text-xs">Account</span>
+            <div className="hidden md:block">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                  className="w-64 px-4 py-2 bg-transparent border-b border-border focus:outline-none focus:border-foreground transition-colors text-sm"
+                />
+                <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              </div>
+            </div>
+            
+            <Link to="/account" className="text-muted-foreground hover:text-foreground transition-colors">
+              <User className="w-5 h-5" />
             </Link>
-            <Link to="/wishlist" className="flex flex-col items-center hover:text-primary transition-colors relative">
-              <Heart className="w-6 h-6" />
-              <span className="text-xs">Wishlist</span>
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+            <Link to="/wishlist" className="text-muted-foreground hover:text-foreground transition-colors relative">
+              <Heart className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 bg-foreground text-background text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">3</span>
             </Link>
-            <Link to="/cart" className="flex flex-col items-center hover:text-primary transition-colors relative">
-              <ShoppingCart className="w-6 h-6" />
-              <span className="text-xs">Cart</span>
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+            <Link to="/cart" className="text-muted-foreground hover:text-foreground transition-colors relative">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 bg-foreground text-background text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">2</span>
             </Link>
           </div>
 
@@ -74,28 +70,25 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Categories */}
-        <div className="hidden md:flex items-center space-x-8 pb-4 border-t border-border pt-4">
-          {categories.map((category) => (
-            <Link
-              key={category}
-              to={`/category/${category.toLowerCase()}`}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              {category}
-            </Link>
-          ))}
-        </div>
-
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-border py-4">
-            <div className="flex flex-col space-y-4">
+          <div className="md:hidden border-t border-border py-6">
+            <div className="flex flex-col space-y-6">
+              <div className="relative mb-4">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                  className="w-full px-4 py-2 bg-transparent border-b border-border focus:outline-none focus:border-foreground transition-colors text-sm"
+                />
+                <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              </div>
               {categories.map((category) => (
                 <Link
                   key={category}
-                  to={`/category/${category.toLowerCase()}`}
-                  className="text-foreground hover:text-primary transition-colors font-medium"
+                  to={`/category/${category.toLowerCase().replace(' ', '-')}`}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {category}
@@ -107,6 +100,7 @@ const Navbar = () => {
       </div>
     </nav>
   );
+
 };
 
 export default Navbar;
