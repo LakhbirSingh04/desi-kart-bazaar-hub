@@ -24,17 +24,19 @@ import Marketing from "./pages/admin/Marketing";
 import NotFound from "./pages/NotFound";
 import Wishlist from "./pages/Wishlist";
 import { WishlistProvider } from "./contexts/WishlistContext";
+import { CartProvider } from "./contexts/CartContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <WishlistProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Navbar />
+      <CartProvider>
+        <WishlistProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -58,6 +60,7 @@ const App = () => (
           <Footer />
         </BrowserRouter>
       </WishlistProvider>
+    </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

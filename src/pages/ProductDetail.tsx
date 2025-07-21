@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useWishlist } from '../contexts/WishlistContext';
+import { useCart } from '../contexts/CartContext';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
@@ -29,6 +31,20 @@ const ProductDetail = () => {
     } else {
       addToWishlist(wishlistItem);
     }
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: productId,
+      name: product.title,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: product.images[0],
+      size: 'M', // You could add size selector here
+      color: 'Default' // You could add color selector here
+    };
+    addToCart(cartItem);
+    // You could show a toast notification here
   };
 
   const nextImage = () => {
@@ -209,7 +225,10 @@ const ProductDetail = () => {
 
             {/* Action Buttons */}
             <div className="flex space-x-4 mb-8">
-              <button className="flex-1 bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center space-x-2">
+              <button 
+                onClick={handleAddToCart}
+                className="flex-1 bg-foreground text-background py-3 px-6 rounded-lg font-medium hover:bg-foreground/90 transition-colors flex items-center justify-center space-x-2"
+              >
                 <ShoppingCart className="w-5 h-5" />
                 <span>Add to Cart</span>
               </button>

@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { Search, Heart, ShoppingCart, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useWishlist } from '../contexts/WishlistContext';
+import { useCart } from '../contexts/CartContext';
 
 const Navbar = () => {
   const { wishlistCount } = useWishlist();
+  const { cartCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,7 +74,11 @@ const Navbar = () => {
             </Link>
             <Link to="/cart" className="text-foreground hover:text-muted-foreground transition-colors relative">
               <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 bg-foreground text-background text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">2</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-foreground text-background text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </div>
         </div>
