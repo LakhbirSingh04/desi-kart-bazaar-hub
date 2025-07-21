@@ -1,41 +1,9 @@
-import { useState } from 'react';
 import { Heart, ShoppingCart, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useWishlist } from '../contexts/WishlistContext';
 
 const Wishlist = () => {
-  const [wishlistItems, setWishlistItems] = useState([
-    {
-      id: 1,
-      name: 'Premium Cotton Shirt',
-      price: 2499,
-      originalPrice: 3499,
-      image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400',
-      size: 'M',
-      color: 'White'
-    },
-    {
-      id: 2,
-      name: 'Slim Fit Jeans',
-      price: 3999,
-      originalPrice: 4999,
-      image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400',
-      size: 'L',
-      color: 'Blue'
-    },
-    {
-      id: 3,
-      name: 'Casual T-Shirt',
-      price: 1299,
-      originalPrice: 1799,
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400',
-      size: 'M',
-      color: 'Black'
-    }
-  ]);
-
-  const removeFromWishlist = (id: number) => {
-    setWishlistItems(items => items.filter(item => item.id !== id));
-  };
+  const { wishlistItems, removeFromWishlist } = useWishlist();
 
   const formatPrice = (price: number) => `₹${price.toLocaleString('en-IN')}`;
 

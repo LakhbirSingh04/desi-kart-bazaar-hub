@@ -23,16 +23,18 @@ import Analytics from "./pages/admin/Analytics";
 import Marketing from "./pages/admin/Marketing";
 import NotFound from "./pages/NotFound";
 import Wishlist from "./pages/Wishlist";
+import { WishlistProvider } from "./contexts/WishlistContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Navbar />
+      <WishlistProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -53,8 +55,9 @@ const App = () => (
           <Route path="/admin/marketing" element={<Marketing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </WishlistProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
