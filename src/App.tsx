@@ -22,6 +22,7 @@ import TaxReports from "./pages/admin/TaxReports";
 import Analytics from "./pages/admin/Analytics";
 import Marketing from "./pages/admin/Marketing";
 import NotFound from "./pages/NotFound";
+import Wishlist from "./pages/Wishlist";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/return-request" element={<ReturnRequest />} />
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin" element={<AdminDashboard />} />

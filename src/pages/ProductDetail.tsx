@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, Camera } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -8,6 +8,20 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const handleWishlistToggle = () => {
+    setIsWishlisted(!isWishlisted);
+    // Here you would typically call an API to add/remove from wishlist
+    console.log(isWishlisted ? 'Removed from wishlist' : 'Added to wishlist');
+  };
+
+  const nextImage = () => {
+    setSelectedImage((prev) => (prev + 1) % product.images.length);
+  };
+
+  const prevImage = () => {
+    setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
+  };
 
   // Mock product data
   const product = {
@@ -65,29 +79,45 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div>
-            <div className="mb-4">
+            <div className="relative mb-4">
               <img
                 src={product.images[selectedImage]}
                 alt={product.title}
                 className="w-full aspect-square object-cover rounded-lg border border-border"
               />
-            </div>
-            <div className="grid grid-cols-4 gap-2">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-square overflow-hidden rounded-md border-2 ${
-                    selectedImage === index ? 'border-primary' : 'border-border'
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`Product view ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+              
+              {/* Navigation arrows */}
+              {product.images.length > 1 && (
+                <>
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </>
+              )}
+              
+              {/* Image indicators */}
+              {product.images.length > 1 && (
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                  {product.images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        selectedImage === index ? 'bg-foreground' : 'bg-muted-foreground'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -166,12 +196,12 @@ const ProductDetail = () => {
                 <span>Add to Cart</span>
               </button>
               <button
-                onClick={() => setIsWishlisted(!isWishlisted)}
+                onClick={handleWishlistToggle}
                 className={`p-3 border border-border rounded-lg hover:bg-muted transition-colors ${
-                  isWishlisted ? 'bg-primary text-primary-foreground' : ''
+                  isWishlisted ? 'bg-foreground text-background' : ''
                 }`}
               >
-                <Heart className="w-5 h-5" />
+                <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
               </button>
             </div>
 

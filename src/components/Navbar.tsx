@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Search, Heart, ShoppingCart, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +6,25 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+        setIsSearchOpen(false);
+      }
+    };
+
+    if (isMenuOpen || isSearchOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen, isSearchOpen]);
 
   const categories = [
     'Shirts', 'T-Shirts', 'Jeans', 'Jackets', 'Formal', 'Accessories'
@@ -13,7 +32,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4" ref={menuRef}>
         <div className="flex items-center justify-between py-4">
           {/* Left side - Menu and Search */}
           <div className="flex items-center space-x-4">
