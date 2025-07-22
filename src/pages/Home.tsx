@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Filter, Grid, List, ChevronDown } from 'lucide-react';
+import { Filter, Grid, List, ChevronDown, Search } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState('popularity');
+  const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState({
     category: '',
     priceRange: '',
@@ -12,6 +14,7 @@ const Home = () => {
     rating: '',
     discount: false
   });
+  const navigate = useNavigate();
 
   // Men's fashion product data
   const products = [
@@ -93,6 +96,11 @@ const Home = () => {
     'All Brands', 'Zara', 'H&M', 'Uniqlo', 'Nike', 'Adidas', 'Levi\'s', 'Tommy Hilfiger'
   ];
 
+  // Filter products based on search query
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Banner */}
@@ -109,10 +117,16 @@ const Home = () => {
               Discover premium menswear that defines modern masculinity
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6 mb-16">
-              <button className="bg-primary text-primary-foreground px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary/90 transition-all duration-300">
+              <button 
+                onClick={() => navigate('/#products')}
+                className="bg-primary text-primary-foreground px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary/90 transition-all duration-300"
+              >
                 SHOP NEW ARRIVALS
               </button>
-              <button className="border border-primary text-primary px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+              <button 
+                onClick={() => navigate('/#products')}
+                className="border border-primary text-primary px-8 py-4 text-lg font-medium tracking-wide hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
                 VIEW COLLECTIONS
               </button>
             </div>
@@ -125,7 +139,21 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8" id="products">
+        {/* Search Bar */}
+        <div className="bg-card border border-border rounded-lg p-4 mb-4">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 w-full border border-border rounded-md bg-background"
+            />
+          </div>
+        </div>
+
         {/* Horizontal Filter Bar */}
         <div className="bg-card border border-border rounded-lg p-4 mb-8 overflow-x-auto">
           <div className="flex items-center space-x-6 min-w-max">
@@ -200,7 +228,7 @@ const Home = () => {
           {/* Toolbar */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <h2 className="text-2xl font-bold">
-              Featured Products ({products.length} items)
+              Featured Products ({filteredProducts.length} items)
             </h2>
             
             <div className="flex items-center gap-4">
@@ -244,7 +272,7 @@ const Home = () => {
               ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
               : 'grid-cols-1'
           }`}>
-            {products.map(product => (
+            {filteredProducts.map(product => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>

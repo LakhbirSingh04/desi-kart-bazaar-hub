@@ -1,8 +1,18 @@
 import { useState } from 'react';
 import { User, Package, Heart, MapPin, RotateCcw, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState('orders');
+  const [userProfile, setUserProfile] = useState({
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    phone: '+91 9876543210'
+  });
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const orders = [
     {
@@ -57,6 +67,21 @@ const Account = () => {
 
   const formatPrice = (price: number) => `₹${price.toLocaleString('en-IN')}`;
 
+  const handleTabClick = (tabId: string) => {
+    if (tabId === 'wishlist') {
+      navigate('/wishlist');
+    } else {
+      setActiveTab(tabId);
+    }
+  };
+
+  const handleProfileSave = () => {
+    toast({
+      title: "Profile Updated",
+      description: "Your profile changes have been saved successfully.",
+    });
+  };
+
   const tabs = [
     { id: 'orders', label: 'My Orders', icon: Package },
     { id: 'wishlist', label: 'Wishlist', icon: Heart },
@@ -79,8 +104,8 @@ const Account = () => {
                   <User className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">John Doe</h3>
-                  <p className="text-sm text-muted-foreground">john@example.com</p>
+                  <h3 className="font-semibold">{userProfile.firstName} {userProfile.lastName}</h3>
+                  <p className="text-sm text-muted-foreground">{userProfile.email}</p>
                 </div>
               </div>
 
@@ -90,7 +115,7 @@ const Account = () => {
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
+                      onClick={() => handleTabClick(tab.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                         activeTab === tab.id
                           ? 'bg-primary text-primary-foreground'
@@ -239,7 +264,8 @@ const Account = () => {
                         <label className="block text-sm font-medium mb-2">First Name</label>
                         <input
                           type="text"
-                          defaultValue="John"
+                          value={userProfile.firstName}
+                          onChange={(e) => setUserProfile({...userProfile, firstName: e.target.value})}
                           className="w-full p-3 border border-border rounded-md bg-background"
                         />
                       </div>
@@ -247,7 +273,8 @@ const Account = () => {
                         <label className="block text-sm font-medium mb-2">Last Name</label>
                         <input
                           type="text"
-                          defaultValue="Doe"
+                          value={userProfile.lastName}
+                          onChange={(e) => setUserProfile({...userProfile, lastName: e.target.value})}
                           className="w-full p-3 border border-border rounded-md bg-background"
                         />
                       </div>
@@ -256,7 +283,8 @@ const Account = () => {
                       <label className="block text-sm font-medium mb-2">Email</label>
                       <input
                         type="email"
-                        defaultValue="john@example.com"
+                        value={userProfile.email}
+                        onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
                         className="w-full p-3 border border-border rounded-md bg-background"
                       />
                     </div>
@@ -264,11 +292,15 @@ const Account = () => {
                       <label className="block text-sm font-medium mb-2">Phone</label>
                       <input
                         type="tel"
-                        defaultValue="+91 9876543210"
+                        value={userProfile.phone}
+                        onChange={(e) => setUserProfile({...userProfile, phone: e.target.value})}
                         className="w-full p-3 border border-border rounded-md bg-background"
                       />
                     </div>
-                    <button className="bg-primary text-primary-foreground px-6 py-3 rounded-md">
+                    <button 
+                      onClick={handleProfileSave}
+                      className="bg-primary text-primary-foreground px-6 py-3 rounded-md"
+                    >
                       Save Changes
                     </button>
                   </div>
