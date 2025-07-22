@@ -1,16 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Search, Heart, ShoppingCart, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
 
 const Navbar = () => {
   const { wishlistCount } = useWishlist();
   const { cartCount } = useCart();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -32,6 +35,15 @@ const Navbar = () => {
 
   const categories = [
     'Shirts', 'T-Shirts', 'Jeans', 'Jackets', 'Formal', 'Accessories'
+  ];
+
+  const adminPages = [
+    { name: 'Dashboard', path: '/admin' },
+    { name: 'Products', path: '/admin/products' },
+    { name: 'Payments', path: '/admin/payments' },
+    { name: 'Analytics', path: '/admin/analytics' },
+    { name: 'Marketing', path: '/admin/marketing' },
+    { name: 'Tax Reports', path: '/admin/tax' }
   ];
 
   return (
@@ -100,21 +112,36 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Category menu - Shows when hamburger is clicked */}
+        {/* Menu - Shows when hamburger is clicked */}
         {isMenuOpen && (
           <div className="border-t border-border py-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {categories.map((category) => (
-                <Link
-                  key={category}
-                  to={`/category/${category.toLowerCase().replace(' ', '-')}`}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {category}
-                </Link>
-              ))}
-            </div>
+            {isAdminRoute ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {adminPages.map((page) => (
+                  <Link
+                    key={page.path}
+                    to={page.path}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {page.name}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {categories.map((category) => (
+                  <Link
+                    key={category}
+                    to={`/category/${category.toLowerCase().replace(' ', '-')}`}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {category}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

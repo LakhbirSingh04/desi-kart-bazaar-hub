@@ -21,6 +21,7 @@ import PaymentManagement from "./pages/admin/PaymentManagement";
 import TaxReports from "./pages/admin/TaxReports";
 import Analytics from "./pages/admin/Analytics";
 import Marketing from "./pages/admin/Marketing";
+import OrderDetails from "./pages/admin/OrderDetails";
 import NotFound from "./pages/NotFound";
 import Wishlist from "./pages/Wishlist";
 import { WishlistProvider } from "./contexts/WishlistContext";
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/admin/tax" element={<TaxReports />} />
           <Route path="/admin/analytics" element={<Analytics />} />
           <Route path="/admin/marketing" element={<Marketing />} />
+          <Route path="/admin/order/:orderId" element={<OrderDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
           <Footer />

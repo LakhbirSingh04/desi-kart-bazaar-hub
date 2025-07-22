@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Package, Users, ShoppingCart, TrendingUp, DollarSign, RotateCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [timeRange, setTimeRange] = useState('30d');
@@ -122,23 +123,25 @@ const AdminDashboard = () => {
             <h3 className="text-lg font-semibold mb-6">Recent Orders</h3>
             <div className="space-y-4">
               {recentOrders.map((order) => (
-                <div key={order.id} className="flex items-center justify-between p-4 border border-border rounded-md">
-                  <div>
-                    <p className="font-medium">{order.id}</p>
-                    <p className="text-sm text-muted-foreground">{order.customer}</p>
-                    <p className="text-sm text-muted-foreground">{order.date}</p>
+                <Link key={order.id} to={`/admin/order/${order.id}`} className="block">
+                  <div className="flex items-center justify-between p-4 border border-border rounded-md hover:bg-muted/50 transition-colors">
+                    <div>
+                      <p className="font-medium">{order.id}</p>
+                      <p className="text-sm text-muted-foreground">{order.customer}</p>
+                      <p className="text-sm text-muted-foreground">{order.date}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">{formatPrice(order.amount)}</p>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        order.status === 'Processing' ? 'bg-warning/10 text-warning' :
+                        order.status === 'Shipped' ? 'bg-info/10 text-info' :
+                        'bg-success/10 text-success'
+                      }`}>
+                        {order.status}
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold">{formatPrice(order.amount)}</p>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      order.status === 'Processing' ? 'bg-warning/10 text-warning' :
-                      order.status === 'Shipped' ? 'bg-info/10 text-info' :
-                      'bg-success/10 text-success'
-                    }`}>
-                      {order.status}
-                    </span>
-                  </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
