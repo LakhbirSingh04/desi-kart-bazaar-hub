@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Truck, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
 
@@ -10,6 +10,8 @@ const ProductDetail = () => {
   const { addToCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
   const [activeTab, setActiveTab] = useState('description');
   
   const productId = parseInt(id || '1');
@@ -22,8 +24,8 @@ const ProductDetail = () => {
       price: product.price,
       originalPrice: product.originalPrice,
       image: product.images[0],
-      size: 'M', // Default size
-      color: 'Default'
+      size: selectedSize || product.sizes[0],
+      color: selectedColor || product.colors[0]
     };
 
     if (isWishlisted) {
@@ -34,17 +36,25 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert('Please select a size');
+      return;
+    }
+    if (!selectedColor) {
+      alert('Please select a color');
+      return;
+    }
+    
     const cartItem = {
       id: productId,
       name: product.title,
       price: product.price,
       originalPrice: product.originalPrice,
       image: product.images[0],
-      size: 'M', // You could add size selector here
-      color: 'Default' // You could add color selector here
+      size: selectedSize,
+      color: selectedColor
     };
     addToCart(cartItem);
-    // You could show a toast notification here
   };
 
   const nextImage = () => {
@@ -55,50 +65,61 @@ const ProductDetail = () => {
     setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
   };
 
-  // Mock product data
+  // Mock clothing product data
   const product = {
     id: productId.toString(),
-    title: 'Samsung Galaxy S24 Ultra 5G (Titanium Gray, 256GB)',
-    price: 124999,
-    originalPrice: 134999,
-    discount: 7,
-    rating: 4.5,
-    reviews: 2547,
+    title: 'Premium Cotton Crew Neck T-Shirt',
+    brand: 'Urban Style',
+    price: 1299,
+    originalPrice: 1899,
+    discount: 32,
+    rating: 4.3,
+    reviews: 847,
     inStock: true,
-    stockCount: 12,
+    stockCount: 24,
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'White', 'Navy Blue', 'Maroon', 'Grey'],
     images: [
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800',
-      'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=800',
-      'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=800',
-      'https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800'
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800',
+      'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=800',
+      'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800',
+      'https://images.unsplash.com/photo-1583743814966-8936f37f4a13?w=800'
     ],
-    description: 'Experience the pinnacle of mobile innovation with the Samsung Galaxy S24 Ultra 5G. Featuring an advanced camera system, powerful Snapdragon processor, and stunning 6.8-inch Dynamic AMOLED display.',
+    description: 'Crafted from premium 100% cotton, this versatile crew neck t-shirt offers exceptional comfort and style. Perfect for casual wear or layering, featuring a contemporary fit and superior fabric quality that gets softer with every wash.',
     specifications: {
-      'Display': '6.8" Dynamic AMOLED 2X, 3120 x 1440 pixels',
-      'Processor': 'Qualcomm Snapdragon 8 Gen 3',
-      'RAM': '12GB',
-      'Storage': '256GB',
-      'Camera': '200MP Main + 50MP Periscope + 10MP Telephoto + 12MP Ultra Wide',
-      'Battery': '5000mAh with 45W Fast Charging',
-      'OS': 'Android 14 with One UI 6.1'
+      'Material': '100% Premium Cotton',
+      'Fit': 'Regular Fit',
+      'Neck Type': 'Crew Neck',
+      'Sleeve Type': 'Short Sleeve',
+      'Pattern': 'Solid',
+      'Care Instructions': 'Machine wash cold, tumble dry low',
+      'Country of Origin': 'India'
     }
   };
 
   const reviews = [
     {
       id: 1,
-      name: 'Rahul Sharma',
+      name: 'Arjun Singh',
       rating: 5,
-      date: '2024-01-15',
-      comment: 'Excellent phone! Camera quality is outstanding and battery life is great.',
-      images: ['https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100']
+      date: '2024-01-20',
+      comment: 'Amazing quality t-shirt! The fabric is super soft and the fit is perfect. Highly recommended!',
+      images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100']
     },
     {
       id: 2,
-      name: 'Priya Patel',
+      name: 'Neha Gupta',
       rating: 4,
-      date: '2024-01-10',
-      comment: 'Very fast performance, loving the display quality. Slightly expensive but worth it.',
+      date: '2024-01-18',
+      comment: 'Good quality cotton t-shirt. Color is exactly as shown. Size L fits well.',
+      images: []
+    },
+    {
+      id: 3,
+      name: 'Rohit Kumar',
+      rating: 5,
+      date: '2024-01-15',
+      comment: 'Excellent value for money. Bought 3 different colors. Very comfortable!',
       images: []
     }
   ];
@@ -116,7 +137,7 @@ const ProductDetail = () => {
                 <img
                   src={product.images[selectedImage]}
                   alt={product.title}
-                  className="w-full h-full object-cover rounded-lg border border-border"
+                  className="w-full h-full object-cover rounded-lg border border-border transition-all duration-500 ease-in-out"
                 />
               
                 {/* Navigation arrows */}
@@ -124,13 +145,13 @@ const ProductDetail = () => {
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-all duration-300 hover:scale-105"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-all duration-300 hover:scale-105"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -157,6 +178,7 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <div>
+            <p className="text-primary font-medium mb-2">{product.brand}</p>
             <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
             
             {/* Rating */}
@@ -203,6 +225,42 @@ const ProductDetail = () => {
               )}
             </div>
 
+            {/* Size Selector */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2">Size</label>
+              <div className="flex flex-wrap gap-2">
+                {product.sizes.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`px-4 py-2 border border-border rounded-md hover:bg-muted transition-colors ${
+                      selectedSize === size ? 'bg-foreground text-background' : ''
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Color Selector */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2">Color</label>
+              <div className="flex flex-wrap gap-2">
+                {product.colors.map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    className={`px-4 py-2 border border-border rounded-md hover:bg-muted transition-colors ${
+                      selectedColor === color ? 'bg-foreground text-background' : ''
+                    }`}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Quantity Selector */}
             <div className="mb-6">
               <label className="block text-sm font-medium mb-2">Quantity</label>
@@ -243,7 +301,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="flex items-center space-x-3 p-4 bg-muted/50 rounded-lg">
                 <Truck className="w-5 h-5 text-primary" />
                 <div>
@@ -255,14 +313,7 @@ const ProductDetail = () => {
                 <RotateCcw className="w-5 h-5 text-primary" />
                 <div>
                   <p className="font-medium text-sm">Easy Returns</p>
-                  <p className="text-xs text-muted-foreground">30 days return</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3 p-4 bg-muted/50 rounded-lg">
-                <Shield className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="font-medium text-sm">Warranty</p>
-                  <p className="text-xs text-muted-foreground">1 year official</p>
+                  <p className="text-xs text-muted-foreground">7 days return</p>
                 </div>
               </div>
             </div>

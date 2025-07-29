@@ -24,6 +24,11 @@ import Marketing from "./pages/admin/Marketing";
 import OrderDetails from "./pages/admin/OrderDetails";
 import NotFound from "./pages/NotFound";
 import Wishlist from "./pages/Wishlist";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Shipping from "./pages/Shipping";
+import Returns from "./pages/Returns";
+import FAQ from "./pages/FAQ";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import { CartProvider } from "./contexts/CartContext";
 
@@ -50,6 +55,11 @@ const App = () => (
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/return-request" element={<ReturnRequest />} />
           <Route path="/track-order" element={<OrderTracking />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/returns" element={<Returns />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/products" element={<ProductManagement />} />
           <Route path="/admin/payments" element={<PaymentManagement />} />
