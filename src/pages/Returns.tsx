@@ -13,6 +13,49 @@ const Returns = () => {
           </p>
         </div>
 
+        {/* Return Policy Overview */}
+        <div className="bg-card border border-border rounded-lg p-8 mb-16">
+          <h2 className="text-3xl font-bold mb-6">Returns, Refunds, Cancellations</h2>
+          <h3 className="text-2xl font-semibold mb-6">No-Questions-Asked Return Policy</h3>
+          <p className="text-muted-foreground mb-8 text-lg">
+            We believe in making your shopping experience as stress-free as possible, ensuring your complete satisfaction with every purchase. 
+            That's why we are thrilled to introduce our brand-new 10-Day No Questions Asked Return Policy. 
+            Here's all you need to know about our hassle-free return policy:
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">10-Day Return</h3>
+              <p className="text-muted-foreground">
+                Easy returns within 10 days of delivery for most items
+              </p>
+            </div>
+
+            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Package className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Free Pickup</h3>
+              <p className="text-muted-foreground">
+                Free doorstep pickup for returns and exchanges
+              </p>
+            </div>
+
+            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <RotateCcw className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Quick Refund</h3>
+              <p className="text-muted-foreground">
+                Refunds processed within 7 business days
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Shipping Section */}
         <div className="bg-card border border-border rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-bold mb-6">Shipping</h2>
@@ -52,49 +95,6 @@ const Returns = () => {
               <p className="text-muted-foreground">
                 Also, you can go to My Accounts → Orders and track order status from the details page. 
                 You can track the status of your package 24 hours after your order is dispatched from our warehouse.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Return Policy Overview */}
-        <div className="bg-card border border-border rounded-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold mb-6">Returns, Refunds, Cancellations</h2>
-          <h3 className="text-2xl font-semibold mb-6">No-Questions-Asked Return Policy</h3>
-          <p className="text-muted-foreground mb-8 text-lg">
-            We believe in making your shopping experience as stress-free as possible, ensuring your complete satisfaction with every purchase. 
-            That's why we are thrilled to introduce our brand-new 10-Day No Questions Asked Return Policy. 
-            Here's all you need to know about our hassle-free return policy:
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">10-Day Return</h3>
-              <p className="text-muted-foreground">
-                Easy returns within 10 days of delivery for most items
-              </p>
-            </div>
-
-            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Package className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Free Pickup</h3>
-              <p className="text-muted-foreground">
-                Free doorstep pickup for returns and exchanges
-              </p>
-            </div>
-
-            <div className="bg-muted/30 border border-border rounded-lg p-6 text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <RotateCcw className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Quick Refund</h3>
-              <p className="text-muted-foreground">
-                Refunds processed within 7 business days
               </p>
             </div>
           </div>
