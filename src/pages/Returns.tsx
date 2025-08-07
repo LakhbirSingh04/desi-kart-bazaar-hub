@@ -56,50 +56,6 @@ const Returns = () => {
           </div>
         </div>
 
-        {/* Shipping Section */}
-        <div className="bg-card border border-border rounded-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold mb-6">Shipping</h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-4">What is the cost of shipping?</h3>
-              <p className="text-muted-foreground mb-6">
-                A shipping charge is applicable to all orders under Rs. 499.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4">How long will it take for the order to reach me?</h3>
-              <p className="text-muted-foreground mb-4">
-                Please refer to the order details page for estimated shipping and delivery timelines for your orders. 
-                From the time of shipping, it takes 7-10 days for orders to reach you.
-              </p>
-              <p className="text-muted-foreground mb-6">
-                If you have placed an order with multiple items, please note that your items may arrive in multiple shipments. 
-                The estimated delivery times are indicative, and, on some occasions, there might be some unavoidable delays beyond our control. 
-                We will keep you informed in case of any delays.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">What can I do if my order dispatch is delayed?</h3>
-              <p className="text-muted-foreground mb-6">
-                We will try our best to get your products to you within the estimated delivery times. 
-                If the package has not reached you by the expected delivery date, please write to us at contact page - Contact 
-                and we will try our best to resolve your issues.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4">My order has been shipped. Can I track it?</h3>
-              <p className="text-muted-foreground mb-4">
-                Once your order has been dispatched, you will receive an email or SMS with the details of the tracking number 
-                and the courier company that is processing your order.
-              </p>
-              <p className="text-muted-foreground">
-                Also, you can go to My Accounts → Orders and track order status from the details page. 
-                You can track the status of your package 24 hours after your order is dispatched from our warehouse.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Return Process */}
         <div className="bg-card border border-border rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-bold mb-6">Easy Returns Process</h2>
@@ -154,6 +110,50 @@ const Returns = () => {
               <h3 className="font-semibold mb-2">Refund Processing</h3>
               <p className="text-sm text-muted-foreground">
                 After your product(s) is received, we will initiate the refund accordingly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Shipping Section */}
+        <div className="bg-card border border-border rounded-lg p-8 mb-16">
+          <h2 className="text-3xl font-bold mb-6">Shipping</h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">What is the cost of shipping?</h3>
+              <p className="text-muted-foreground mb-6">
+                A shipping charge is applicable to all orders under Rs. 499.
+              </p>
+              
+              <h3 className="text-xl font-semibold mb-4">How long will it take for the order to reach me?</h3>
+              <p className="text-muted-foreground mb-4">
+                Please refer to the order details page for estimated shipping and delivery timelines for your orders. 
+                From the time of shipping, it takes 7-10 days for orders to reach you.
+              </p>
+              <p className="text-muted-foreground mb-6">
+                If you have placed an order with multiple items, please note that your items may arrive in multiple shipments. 
+                The estimated delivery times are indicative, and, on some occasions, there might be some unavoidable delays beyond our control. 
+                We will keep you informed in case of any delays.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">What can I do if my order dispatch is delayed?</h3>
+              <p className="text-muted-foreground mb-6">
+                We will try our best to get your products to you within the estimated delivery times. 
+                If the package has not reached you by the expected delivery date, please write to us at contact page - Contact 
+                and we will try our best to resolve your issues.
+              </p>
+              
+              <h3 className="text-xl font-semibold mb-4">My order has been shipped. Can I track it?</h3>
+              <p className="text-muted-foreground mb-4">
+                Once your order has been dispatched, you will receive an email or SMS with the details of the tracking number 
+                and the courier company that is processing your order.
+              </p>
+              <p className="text-muted-foreground">
+                Also, you can go to My Accounts → Orders and track order status from the details page. 
+                You can track the status of your package 24 hours after your order is dispatched from our warehouse.
               </p>
             </div>
           </div>

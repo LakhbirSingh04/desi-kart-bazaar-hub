@@ -1,11 +1,26 @@
 import { Heart, ShoppingCart, X, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useWishlist } from '../contexts/WishlistContext';
+import { useCart } from '../contexts/CartContext';
 
 const Wishlist = () => {
   const { wishlistItems, removeFromWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   const formatPrice = (price: number) => `₹${price.toLocaleString('en-IN')}`;
+
+  const handleAddToCart = (item: any) => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      originalPrice: item.originalPrice,
+      image: item.image,
+      size: item.size,
+      color: item.color
+    });
+    removeFromWishlist(item.id);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,14 +49,14 @@ const Wishlist = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {wishlistItems.map((item) => (
               <div 
                 key={item.id} 
                 className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
               >
                 {/* Image Container */}
-                <div className="aspect-[3/4] bg-muted/20 relative overflow-hidden">
+                <div className="aspect-[4/5] bg-muted/20 relative overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -57,9 +72,12 @@ const Wishlist = () => {
                   </button>
 
                   {/* Shopping Bag Icon */}
-                  <div className="absolute bottom-3 right-3 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                  <button
+                    onClick={() => handleAddToCart(item)}
+                    className="absolute bottom-3 right-3 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
+                  >
                     <ShoppingCart className="w-5 h-5 text-foreground" />
-                  </div>
+                  </button>
                 </div>
 
                 {/* Product Info */}
