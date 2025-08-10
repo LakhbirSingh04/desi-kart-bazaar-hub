@@ -56,7 +56,7 @@ const Wishlist = () => {
                 className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
               >
                 {/* Image Container */}
-                <div className="aspect-[4/5] bg-muted/20 relative overflow-hidden">
+                <div className="aspect-[3/4] bg-muted/20 relative overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -66,29 +66,29 @@ const Wishlist = () => {
                   {/* Remove Button */}
                   <button
                     onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-3 right-3 w-8 h-8 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
+                    className="absolute top-2 right-2 w-6 h-6 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
                   >
-                    <X className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                    <X className="w-3 h-3 text-muted-foreground hover:text-foreground" />
                   </button>
 
                   {/* Shopping Bag Icon */}
                   <button
                     onClick={() => handleAddToCart(item)}
-                    className="absolute bottom-3 right-3 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
+                    className="absolute bottom-2 right-2 w-8 h-8 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
                   >
-                    <ShoppingCart className="w-5 h-5 text-foreground" />
+                    <ShoppingCart className="w-4 h-4 text-foreground" />
                   </button>
                 </div>
 
                 {/* Product Info */}
                 <div className="p-4">
                   <Link to={`/product/${item.id}`} className="block">
-                    <h3 className="font-medium text-foreground mb-2 hover:text-primary transition-colors">
+                    <h3 className="text-sm font-medium text-foreground mb-2 hover:text-primary transition-colors">
                       {item.name}
                     </h3>
                   </Link>
                   
-                  <div className="text-lg font-semibold text-foreground">
+                  <div className="text-base font-semibold text-foreground">
                     {formatPrice(item.price)}
                   </div>
 
