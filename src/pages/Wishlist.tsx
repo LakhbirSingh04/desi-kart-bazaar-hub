@@ -49,7 +49,7 @@ const Wishlist = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             {wishlistItems.map((item) => (
             <div 
               key={item.id} 
@@ -81,7 +81,7 @@ const Wishlist = () => {
                 </div>
 
                 {/* Product Info */}
-                <div className="p-4">
+                <div className="p-2">
                   <Link to={`/product/${item.id}`} className="block">
                     <h3 className="text-sm font-medium text-foreground mb-2 hover:text-primary transition-colors">
                       {item.name}
