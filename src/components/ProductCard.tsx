@@ -46,7 +46,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
+    <div className="group relative bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
       <Link to={`/product/${id}`}>
         {/* Badges */}
         <div className="absolute top-2 left-2 z-10 flex flex-col space-y-1">

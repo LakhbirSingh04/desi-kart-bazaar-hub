@@ -51,25 +51,25 @@ const Wishlist = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {wishlistItems.map((item) => (
-              <div 
-                key={item.id} 
-                className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
-              >
-                {/* Image Container */}
-                <div className="aspect-[3/4] bg-muted/20 relative overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Remove Button */}
-                  <button
-                    onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-2 right-2 w-6 h-6 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
-                  >
-                    <X className="w-3 h-3 text-muted-foreground hover:text-foreground" />
-                  </button>
+            <div 
+              key={item.id} 
+              className="group relative bg-card overflow-hidden hover:shadow-lg transition-all duration-300"
+            >
+              {/* Image Container */}
+              <div className="aspect-[3/4] bg-muted/20 relative overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Remove Button */}
+                <button
+                  onClick={() => removeFromWishlist(item.id)}
+                  className="absolute top-2 right-2 w-7 h-7 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
+                >
+                  <X className="w-4 h-4 text-black hover:text-black" />
+                </button>
 
                   {/* Shopping Bag Icon */}
                   <button
