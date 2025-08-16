@@ -115,6 +115,46 @@ const Returns = () => {
           </div>
         </div>
 
+        {/* Refund Information */}
+        <div className="bg-muted/50 rounded-lg p-8 mb-16">
+          <h2 className="text-3xl font-bold mb-6">Refund Information</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Refund Timeline</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span>Credit/Debit Cards</span>
+                  <span className="text-primary font-semibold">3-5 business days</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Net Banking</span>
+                  <span className="text-primary font-semibold">3-5 business days</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>UPI</span>
+                  <span className="text-primary font-semibold">1-2 business days</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Wallet Refund</span>
+                  <span className="text-primary font-semibold">Instant</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Important Notes</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• Refunds are processed to the original payment method</li>
+                <li>• Bank processing times may vary</li>
+                <li>• For COD orders, refund via bank transfer</li>
+                <li>• Shipping charges are non-refundable unless item is defective</li>
+                <li>• Quality check required before refund processing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Shipping Section */}
         <div className="bg-card border border-border rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-bold mb-6">Shipping</h2>
@@ -210,52 +250,6 @@ const Returns = () => {
         {/* Return Categories */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <div>
-            <h2 className="text-3xl font-bold mb-6">What Can Be Returned?</h2>
-            
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-green-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Clothing & Fashion</h3>
-                  <p className="text-muted-foreground">
-                    All clothing items with tags intact. Must be unworn and in original condition.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-green-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Electronics</h3>
-                  <p className="text-muted-foreground">
-                    Unopened items with original packaging, accessories, and warranty cards.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-green-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Home & Lifestyle</h3>
-                  <p className="text-muted-foreground">
-                    Unused items in original packaging. Some assembly may be required for return.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-green-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Books & Media</h3>
-                  <p className="text-muted-foreground">
-                    Physical books and media in original condition without damage.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
             <h2 className="text-3xl font-bold mb-6">Non-Returnable Items</h2>
             
             <div className="space-y-6">
@@ -298,46 +292,6 @@ const Returns = () => {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Refund Information */}
-        <div className="bg-muted/50 rounded-lg p-8">
-          <h2 className="text-3xl font-bold mb-6">Refund Information</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Refund Timeline</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span>Credit/Debit Cards</span>
-                  <span className="text-primary font-semibold">3-5 business days</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Net Banking</span>
-                  <span className="text-primary font-semibold">3-5 business days</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>UPI</span>
-                  <span className="text-primary font-semibold">1-2 business days</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Wallet Refund</span>
-                  <span className="text-primary font-semibold">Instant</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Important Notes</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• Refunds are processed to the original payment method</li>
-                <li>• Bank processing times may vary</li>
-                <li>• For COD orders, refund via bank transfer</li>
-                <li>• Shipping charges are non-refundable unless item is defective</li>
-                <li>• Quality check required before refund processing</li>
-              </ul>
             </div>
           </div>
         </div>
