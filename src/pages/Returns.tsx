@@ -247,54 +247,6 @@ const Returns = () => {
           </p>
         </div>
 
-        {/* Return Categories */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="text-3xl font-bold mb-6">Non-Returnable Items</h2>
-            
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <XCircle className="w-6 h-6 text-red-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Personal Care</h3>
-                  <p className="text-muted-foreground">
-                    Cosmetics, skincare, and personal hygiene products for safety reasons.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <XCircle className="w-6 h-6 text-red-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Food & Beverages</h3>
-                  <p className="text-muted-foreground">
-                    Perishable items and consumables cannot be returned for health reasons.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <XCircle className="w-6 h-6 text-red-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Customized Products</h3>
-                  <p className="text-muted-foreground">
-                    Personalized or made-to-order items cannot be returned.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <XCircle className="w-6 h-6 text-red-600 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-2">Digital Products</h3>
-                  <p className="text-muted-foreground">
-                    Downloaded software, e-books, and digital content.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
