@@ -113,7 +113,7 @@ const Cart = () => {
               <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
                 <div className="flex justify-between items-center">
                   <span className="font-medium">Total</span>
-                  <span className="text-xl font-bold text-primary">{formatPrice(total)}</span>
+                  <span className="text-lg font-bold text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
 
