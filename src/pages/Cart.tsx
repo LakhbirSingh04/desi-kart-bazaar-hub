@@ -35,7 +35,7 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Shopping Cart ({cartItems.length} items)</h1>
+        <h1 className="text-xl font-bold mb-6">Shopping Cart ({cartItems.length} items)</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -108,22 +108,20 @@ const Cart = () => {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-card border border-border rounded-lg p-4 sticky top-4">
-              <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
+              <h3 className="text-base font-semibold mb-3">Order Summary</h3>
               
-              <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">Total</span>
-                  <span className="text-lg font-bold text-primary">{formatPrice(total)}</span>
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 mb-3 flex justify-between items-center gap-3">
+                <div>
+                  <span className="text-sm text-muted-foreground">Total</span>
+                  <div className="text-base font-bold text-primary">{formatPrice(total)}</div>
                 </div>
+                <Link
+                  to="/checkout"
+                  className="bg-foreground text-background py-2 px-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors text-sm"
+                >
+                  Checkout
+                </Link>
               </div>
-
-              {/* Checkout Button */}
-              <Link
-                to="/checkout"
-                className="w-full bg-foreground text-background py-3 px-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors mb-3 block text-center text-sm"
-              >
-                Proceed to Checkout
-              </Link>
 
               {/* Continue Shopping */}
               <Link
