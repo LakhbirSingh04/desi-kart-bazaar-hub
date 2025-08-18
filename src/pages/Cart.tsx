@@ -107,20 +107,20 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-xl p-8 sticky top-4 shadow-sm">
-              <h3 className="text-2xl font-bold mb-8 text-center">Order Summary</h3>
+            <div className="bg-card border border-border rounded-lg p-4 sticky top-4">
+              <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
               
-              <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-6">
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-medium">Total Amount</span>
-                  <span className="text-2xl font-bold text-primary">{formatPrice(total)}</span>
+                  <span className="font-medium">Total</span>
+                  <span className="text-xl font-bold text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
 
               {/* Checkout Button */}
               <Link
                 to="/checkout"
-                className="w-full bg-foreground text-background py-3 px-6 rounded-lg font-medium hover:bg-foreground/90 transition-colors mt-6 block text-center"
+                className="w-full bg-foreground text-background py-3 px-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors mb-3 block text-center text-sm"
               >
                 Proceed to Checkout
               </Link>
@@ -128,16 +128,16 @@ const Cart = () => {
               {/* Continue Shopping */}
               <Link
                 to="/"
-                className="w-full border border-border py-3 px-6 rounded-lg font-medium hover:bg-muted transition-colors mt-3 block text-center"
+                className="w-full border border-border py-2 px-4 rounded-lg font-medium hover:bg-muted transition-colors block text-center text-sm"
               >
                 Continue Shopping
               </Link>
 
               {/* Free Shipping Notice */}
               {subtotal < 499 && (
-                <div className="mt-4 p-3 bg-warning/10 border border-warning/20 rounded-lg">
-                  <p className="text-sm text-warning-foreground">
-                    Add {formatPrice(499 - subtotal)} more to get FREE shipping!
+                <div className="mt-3 p-3 bg-warning/10 border border-warning/20 rounded-lg">
+                  <p className="text-xs text-warning-foreground">
+                    Add {formatPrice(499 - subtotal)} more for FREE shipping!
                   </p>
                 </div>
               )}
