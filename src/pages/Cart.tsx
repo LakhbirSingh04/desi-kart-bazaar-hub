@@ -39,52 +39,52 @@ const Cart = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-6">
             {cartItems.map((item) => (
-              <div key={`${item.id}-${item.size}-${item.color}`} className="bg-card border border-border rounded-lg p-6">
-                <div className="flex flex-col sm:flex-row gap-4">
+              <div key={`${item.id}-${item.size}-${item.color}`} className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex flex-col sm:flex-row gap-6">
                   {/* Product Image */}
-                  <div className="w-full sm:w-32 aspect-square">
+                  <div className="w-full sm:w-36 aspect-square">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover rounded-md"
+                      className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
 
                   {/* Product Details */}
                   <div className="flex-1">
-                    <h3 className="font-medium text-lg mb-2">{item.name}</h3>
+                    <h3 className="font-semibold text-xl mb-3">{item.name}</h3>
                     
-                    <div className="flex items-center space-x-4 text-xs text-muted-foreground mb-2">
-                      <span>Size: {item.size}</span>
-                      <span>Color: {item.color}</span>
+                    <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
+                      <span className="bg-muted px-3 py-1 rounded-full">Size: {item.size}</span>
+                      <span className="bg-muted px-3 py-1 rounded-full">Color: {item.color}</span>
                     </div>
                     
-                    <div className="flex items-center space-x-3 mb-4">
-                      <span className="text-xl font-bold">
+                    <div className="flex items-center space-x-3 mb-6">
+                      <span className="text-2xl font-bold text-primary">
                         {formatPrice(item.price)}
                       </span>
-                      <span className="text-sm text-muted-foreground line-through">
+                      <span className="text-lg text-muted-foreground line-through">
                         {formatPrice(item.originalPrice)}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between">
                       {/* Quantity Controls */}
-                      <div className="flex items-center space-x-3">
-                        <label className="text-sm font-medium">Qty:</label>
-                        <div className="flex items-center border border-border rounded-md">
+                      <div className="flex items-center space-x-4">
+                        <label className="text-sm font-medium">Quantity:</label>
+                        <div className="flex items-center border border-border rounded-lg overflow-hidden">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-2 hover:bg-muted transition-colors"
+                            className="p-3 hover:bg-muted transition-colors"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
-                          <span className="px-4 py-2 font-medium">{item.quantity}</span>
+                          <span className="px-6 py-3 font-semibold bg-muted/50">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="p-2 hover:bg-muted transition-colors"
+                            className="p-3 hover:bg-muted transition-colors"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -94,10 +94,10 @@ const Cart = () => {
                       {/* Remove Button */}
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-destructive hover:text-destructive/80 transition-colors flex items-center space-x-1"
+                        className="text-destructive hover:text-destructive/80 transition-colors flex items-center space-x-2 bg-destructive/10 hover:bg-destructive/20 px-4 py-2 rounded-lg"
                       >
                         <Trash2 className="w-4 h-4" />
-                        <span>Remove</span>
+                        <span className="font-medium">Remove</span>
                       </button>
                     </div>
                   </div>
@@ -108,36 +108,13 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-lg p-6 sticky top-4">
-              <h3 className="text-lg font-semibold mb-6">Order Summary</h3>
+            <div className="bg-card border border-border rounded-xl p-8 sticky top-4 shadow-sm">
+              <h3 className="text-2xl font-bold mb-8 text-center">Order Summary</h3>
               
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>{formatPrice(subtotal)}</span>
-                </div>
-                
-                <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span>
-                    {shipping === 0 ? (
-                      <span className="text-success">FREE</span>
-                    ) : (
-                      formatPrice(shipping)
-                    )}
-                  </span>
-                </div>
-                
-                <div className="flex justify-between">
-                  <span>Tax (GST 18%)</span>
-                  <span>{formatPrice(tax)}</span>
-                </div>
-                
-                <hr className="border-border" />
-                
-                <div className="flex justify-between text-lg font-bold">
-                  <span>Total</span>
-                  <span>{formatPrice(total)}</span>
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-6">
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-medium">Total Amount</span>
+                  <span className="text-2xl font-bold text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
 
