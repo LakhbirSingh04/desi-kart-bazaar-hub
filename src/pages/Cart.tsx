@@ -39,54 +39,54 @@ const Cart = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
-              <div key={`${item.id}-${item.size}-${item.color}`} className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex flex-col sm:flex-row gap-6">
+              <div key={`${item.id}-${item.size}-${item.color}`} className="bg-card border border-border rounded-lg p-4 shadow-sm">
+                <div className="flex gap-4">
                   {/* Product Image */}
-                  <div className="w-full sm:w-36 aspect-square">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-md"
                     />
                   </div>
 
                   {/* Product Details */}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-xl mb-3">{item.name}</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-base sm:text-lg mb-2 truncate">{item.name}</h3>
                     
-                    <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
-                      <span className="bg-muted px-3 py-1 rounded-full">Size: {item.size}</span>
-                      <span className="bg-muted px-3 py-1 rounded-full">Color: {item.color}</span>
+                    <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-3">
+                      <span className="bg-muted px-2 py-1 rounded">Size: {item.size}</span>
+                      <span className="bg-muted px-2 py-1 rounded">Color: {item.color}</span>
                     </div>
                     
-                    <div className="flex items-center space-x-3 mb-6">
-                      <span className="text-2xl font-bold text-primary">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg font-bold text-primary">
                         {formatPrice(item.price)}
                       </span>
-                      <span className="text-lg text-muted-foreground line-through">
+                      <span className="text-sm text-muted-foreground line-through">
                         {formatPrice(item.originalPrice)}
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-4">
                       {/* Quantity Controls */}
-                      <div className="flex items-center space-x-4">
-                        <label className="text-sm font-medium">Quantity:</label>
-                        <div className="flex items-center border border-border rounded-lg overflow-hidden">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium">Qty:</span>
+                        <div className="flex items-center border border-border rounded">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-3 hover:bg-muted transition-colors"
+                            className="p-1.5 hover:bg-muted transition-colors"
                           >
-                            <Minus className="w-4 h-4" />
+                            <Minus className="w-3 h-3" />
                           </button>
-                          <span className="px-6 py-3 font-semibold bg-muted/50">{item.quantity}</span>
+                          <span className="px-3 py-1.5 text-sm font-medium">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="p-3 hover:bg-muted transition-colors"
+                            className="p-1.5 hover:bg-muted transition-colors"
                           >
-                            <Plus className="w-4 h-4" />
+                            <Plus className="w-3 h-3" />
                           </button>
                         </div>
                       </div>
@@ -94,10 +94,9 @@ const Cart = () => {
                       {/* Remove Button */}
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-destructive hover:text-destructive/80 transition-colors flex items-center space-x-2 bg-destructive/10 hover:bg-destructive/20 px-4 py-2 rounded-lg"
+                        className="text-destructive hover:text-destructive/80 transition-colors p-1"
                       >
                         <Trash2 className="w-4 h-4" />
-                        <span className="font-medium">Remove</span>
                       </button>
                     </div>
                   </div>
