@@ -105,54 +105,28 @@ const Cart = () => {
             ))}
           </div>
 
-          {/* Order Summary */}
+          {/* Checkout Section */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-lg p-6 sticky top-4">
-              <h3 className="text-lg font-semibold mb-6 text-foreground">Order Summary</h3>
-              
-              {/* Order Total */}
-              <div className="mb-6">
-                <div className="flex justify-between items-baseline mb-2">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">{formatPrice(subtotal)}</span>
+            <div className="sticky top-4">
+              {/* Minimalist Total & Checkout */}
+              <div className="flex items-center justify-between gap-6 p-6 bg-background/80 backdrop-blur-sm rounded-2xl border border-border/50">
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Total</p>
+                  <p className="text-2xl font-bold text-foreground">{formatPrice(total)}</p>
                 </div>
-                <div className="flex justify-between items-baseline mb-2">
-                  <span className="text-muted-foreground">Shipping</span>
-                  <span className="font-medium">{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
-                </div>
-                <div className="flex justify-between items-baseline mb-4">
-                  <span className="text-muted-foreground">Tax (GST)</span>
-                  <span className="font-medium">{formatPrice(tax)}</span>
-                </div>
-                <div className="border-t border-border pt-4">
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-lg font-semibold">Total</span>
-                    <span className="text-2xl font-bold text-primary">{formatPrice(total)}</span>
-                  </div>
-                </div>
+                <Link
+                  to="/checkout"
+                  className="bg-foreground text-background px-8 py-3 rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  Checkout
+                </Link>
               </div>
-
-              {/* Checkout Button */}
-              <Link
-                to="/checkout"
-                className="w-full bg-foreground text-background py-3 px-6 rounded-lg font-semibold hover:bg-foreground/90 transition-all duration-200 block text-center mb-4 shadow-sm hover:shadow-md"
-              >
-                Proceed to Checkout
-              </Link>
-
-              {/* Continue Shopping */}
-              <Link
-                to="/"
-                className="w-full border border-border py-2.5 px-4 rounded-lg font-medium hover:bg-muted transition-colors block text-center text-sm text-muted-foreground hover:text-foreground"
-              >
-                Continue Shopping
-              </Link>
 
               {/* Free Shipping Notice */}
               {subtotal < 499 && (
-                <div className="mt-4 p-3 bg-gradient-to-r from-primary/10 to-primary/5 border-l-4 border-primary rounded-r-lg">
-                  <p className="text-sm font-medium text-primary">
-                    Add {formatPrice(499 - subtotal)} more for FREE shipping! 🚚
+                <div className="mt-4 p-4 bg-gradient-to-r from-primary/5 to-transparent rounded-xl border-l-2 border-primary">
+                  <p className="text-sm text-primary font-medium">
+                    Add {formatPrice(499 - subtotal)} more for free shipping
                   </p>
                 </div>
               )}
