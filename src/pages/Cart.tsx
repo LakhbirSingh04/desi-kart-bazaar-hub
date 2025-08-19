@@ -41,19 +41,19 @@ const Cart = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-0">
             {cartItems.map((item, index) => (
-              <div key={`${item.id}-${item.size}-${item.color}`} className={`p-4 ${index > 0 ? 'border-t border-border/30' : ''}`}>
-                <div className="flex gap-4">
+              <div key={`${item.id}-${item.size}-${item.color}`} className={`p-2 ${index > 0 ? 'border-t border-border/30' : ''}`}>
+                <div className="flex gap-2">
                   {/* Product Image */}
-                  <div className="w-20 h-28 sm:w-24 sm:h-32 flex-shrink-0">
+                  <div className="w-32 h-40 sm:w-40 sm:h-48 flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover rounded-md"
+                      className="w-full h-full object-cover"
                     />
                   </div>
 
                   {/* Product Details */}
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 p-2">
                     <h3 className="font-medium text-base sm:text-lg mb-2 truncate">{item.name}</h3>
                     
                     <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-3">
@@ -71,24 +71,9 @@ const Cart = () => {
                     </div>
 
                     <div className="flex items-center justify-between gap-4">
-                      {/* Quantity Controls */}
+                      {/* Quantity Display */}
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Qty:</span>
-                        <div className="flex items-center border border-border rounded">
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-1.5 hover:bg-muted transition-colors"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="px-3 py-1.5 text-sm font-medium">{item.quantity}</span>
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="p-1.5 hover:bg-muted transition-colors"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
+                        <span className="text-sm font-medium">Qty: {item.quantity}</span>
                       </div>
 
                       {/* Remove Button */}
