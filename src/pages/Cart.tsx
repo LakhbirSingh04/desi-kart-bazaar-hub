@@ -58,7 +58,6 @@ const Cart = () => {
                     
                     <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-3">
                       <span className="bg-muted px-2 py-1 rounded">Size: {item.size}</span>
-                      <span className="bg-muted px-2 py-1 rounded">Color: {item.color}</span>
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
