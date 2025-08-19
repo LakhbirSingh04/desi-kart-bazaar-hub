@@ -39,9 +39,9 @@ const Cart = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
-            {cartItems.map((item) => (
-              <div key={`${item.id}-${item.size}-${item.color}`} className="bg-card border border-border rounded-lg p-4 shadow-sm">
+          <div className="lg:col-span-2 space-y-0 md:space-y-4">
+            {cartItems.map((item, index) => (
+              <div key={`${item.id}-${item.size}-${item.color}`} className={`p-4 md:bg-card md:border md:border-border md:rounded-lg md:shadow-sm ${index > 0 ? 'border-t border-border/30 md:border-t-0' : ''}`}>
                 <div className="flex gap-4">
                   {/* Product Image */}
                   <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
@@ -109,14 +109,14 @@ const Cart = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-4">
               {/* Minimalist Total & Checkout */}
-              <div className="flex items-center justify-between gap-6 p-6 bg-background/80 backdrop-blur-sm rounded-2xl border border-border/50">
+              <div className="flex items-center justify-between gap-3 md:gap-6 p-4 md:p-6 bg-background/80 backdrop-blur-sm rounded-none md:rounded-2xl border border-border/50">
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">Total</p>
-                  <p className="text-2xl font-bold text-foreground">{formatPrice(total)}</p>
+                  <p className="text-lg md:text-2xl font-bold text-foreground">{formatPrice(total)}</p>
                 </div>
                 <Link
                   to="/checkout"
-                  className="bg-foreground text-background px-8 py-3 rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="bg-foreground text-background px-12 md:px-16 py-4 md:py-3 rounded-none md:rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex-1 md:flex-none text-center"
                 >
                   Checkout
                 </Link>
