@@ -39,12 +39,12 @@ const Cart = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-0 md:space-y-4">
+          <div className="lg:col-span-2 space-y-0">
             {cartItems.map((item, index) => (
-              <div key={`${item.id}-${item.size}-${item.color}`} className={`p-4 md:bg-card md:border md:border-border md:rounded-lg md:shadow-sm ${index > 0 ? 'border-t border-border/30 md:border-t-0' : ''}`}>
+              <div key={`${item.id}-${item.size}-${item.color}`} className={`p-4 ${index > 0 ? 'border-t border-border/30' : ''}`}>
                 <div className="flex gap-4">
                   {/* Product Image */}
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
+                  <div className="w-20 h-28 sm:w-24 sm:h-32 flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -116,7 +116,7 @@ const Cart = () => {
                 </div>
                 <Link
                   to="/checkout"
-                  className="bg-foreground text-background px-8 md:px-20 py-3 md:py-3 rounded-md font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex-1 md:flex-none text-center"
+                  className="bg-foreground text-background px-6 md:px-20 py-3 md:py-3 rounded-md font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex-1 md:flex-none text-center"
                 >
                   Checkout
                 </Link>
