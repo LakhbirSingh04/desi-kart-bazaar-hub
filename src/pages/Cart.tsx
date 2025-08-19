@@ -116,7 +116,7 @@ const Cart = () => {
                 </div>
                 <Link
                   to="/checkout"
-                  className="bg-foreground text-background px-12 md:px-16 py-4 md:py-3 rounded-none md:rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex-1 md:flex-none text-center"
+                  className="bg-foreground text-background px-8 md:px-20 py-3 md:py-3 rounded-md font-semibold hover:bg-foreground/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex-1 md:flex-none text-center"
                 >
                   Checkout
                 </Link>
