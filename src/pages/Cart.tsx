@@ -44,11 +44,11 @@ const Cart = () => {
               <div key={`${item.id}-${item.size}-${item.color}`} className={`p-2 ${index > 0 ? 'border-t border-border/30' : ''}`}>
                 <div className="flex gap-2">
                   {/* Product Image */}
-                  <div className="w-32 h-40 sm:w-40 sm:h-48 flex-shrink-0">
+                  <div className="w-36 h-44 sm:w-44 sm:h-52 flex-shrink-0 overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
 
@@ -61,11 +61,8 @@ const Cart = () => {
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg font-bold text-primary">
+                      <span className="text-base font-normal text-foreground">
                         {formatPrice(item.price)}
-                      </span>
-                      <span className="text-sm text-muted-foreground line-through">
-                        {formatPrice(item.originalPrice)}
                       </span>
                     </div>
 
