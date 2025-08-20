@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Star, Heart, ShoppingCart, Truck, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -80,15 +81,25 @@ const ProductDetail = () => {
       'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800',
       'https://images.unsplash.com/photo-1583743814966-8936f37f4a13?w=800'
     ],
-    description: 'Crafted from premium 100% cotton, this versatile crew neck t-shirt offers exceptional comfort and style. Perfect for casual wear or layering, featuring a contemporary fit and superior fabric quality that gets softer with every wash.',
-    specifications: {
-      'Material': '100% Premium Cotton',
-      'Fit': 'Regular Fit',
-      'Neck Type': 'Crew Neck',
-      'Sleeve Type': 'Short Sleeve',
+    productDetails: {
+      'Main Material': '100% Premium Cotton',
+      'Stretchability': 'Slightly Stretchable',
+      'Fit Type': 'Regular Fit',
+      'Quantity': '1 Piece',
+      'Neckline': 'Crew Neck',
+      'Sleeve Type': 'Regular Sleeve',
+      'Sleeve Length': 'Short Sleeve',
+      'Length': 'Regular',
       'Pattern': 'Solid',
+      'Occasion': 'Casual & Daily Wear',
+      'Season': 'All Season',
+      'Fabric Quality': 'Premium Grade'
+    },
+    specifications: {
       'Care Instructions': 'Machine wash cold, tumble dry low',
-      'Country of Origin': 'India'
+      'Country of Origin': 'India',
+      'Manufacturer': 'Urban Style Apparel Pvt Ltd',
+      'Net Quantity': '1 N'
     }
   };
 
@@ -285,153 +296,196 @@ const ProductDetail = () => {
         </div>
 
         {/* Product Details Section */}
-        <div className="mt-16 space-y-12">
-          {/* Description & Specifications */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Product Details</h2>
-            <div className="prose max-w-none mb-8">
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                {product.description}
-              </p>
-            </div>
-            
-            <h3 className="text-xl font-semibold mb-4">Specifications</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {Object.entries(product.specifications).map(([key, value]) => (
-                <div key={key} className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                  <span className="font-medium">{key}</span>
-                  <span className="text-muted-foreground">{value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Size Guide */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Size Guide</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-border rounded-lg">
-                <thead>
-                  <tr className="bg-muted/50">
-                    <th className="border border-border p-3 text-left">Size</th>
-                    <th className="border border-border p-3 text-left">Chest (inches)</th>
-                    <th className="border border-border p-3 text-left">Length (inches)</th>
-                    <th className="border border-border p-3 text-left">Shoulder (inches)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td className="border border-border p-3">XS</td><td className="border border-border p-3">34-36</td><td className="border border-border p-3">26</td><td className="border border-border p-3">16</td></tr>
-                  <tr className="bg-muted/25"><td className="border border-border p-3">S</td><td className="border border-border p-3">36-38</td><td className="border border-border p-3">27</td><td className="border border-border p-3">17</td></tr>
-                  <tr><td className="border border-border p-3">M</td><td className="border border-border p-3">38-40</td><td className="border border-border p-3">28</td><td className="border border-border p-3">18</td></tr>
-                  <tr className="bg-muted/25"><td className="border border-border p-3">L</td><td className="border border-border p-3">40-42</td><td className="border border-border p-3">29</td><td className="border border-border p-3">19</td></tr>
-                  <tr><td className="border border-border p-3">XL</td><td className="border border-border p-3">42-44</td><td className="border border-border p-3">30</td><td className="border border-border p-3">20</td></tr>
-                  <tr className="bg-muted/25"><td className="border border-border p-3">XXL</td><td className="border border-border p-3">44-46</td><td className="border border-border p-3">31</td><td className="border border-border p-3">21</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Fabric & Care */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Fabric & Care</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-medium">Fabric Details</h4>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>• Premium 100% cotton fabric</li>
-                  <li>• Pre-shrunk for lasting fit</li>
-                  <li>• Breathable and moisture-wicking</li>
-                  <li>• Soft texture that improves with wash</li>
-                  <li>• Durable construction with reinforced seams</li>
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="font-medium">Care Instructions</h4>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>• Machine wash in cold water (30°C)</li>
-                  <li>• Use mild detergent, avoid bleach</li>
-                  <li>• Tumble dry on low heat or air dry</li>
-                  <li>• Iron on medium heat if needed</li>
-                  <li>• Do not dry clean</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Delivery & Returns */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Delivery & Returns</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 bg-muted/30 rounded-lg">
-                <h4 className="font-medium mb-3 flex items-center">
-                  <Truck className="w-5 h-5 mr-2 text-primary" />
-                  Delivery Information
-                </h4>
-                <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• Free delivery on orders above ₹499</li>
-                  <li>• Standard delivery: 3-5 business days</li>
-                  <li>• Express delivery: 1-2 business days (₹99)</li>
-                  <li>• Same day delivery available in select cities</li>
-                  <li>• Cash on delivery available</li>
-                </ul>
-              </div>
-              <div className="p-6 bg-muted/30 rounded-lg">
-                <h4 className="font-medium mb-3 flex items-center">
-                  <RotateCcw className="w-5 h-5 mr-2 text-primary" />
-                  Return Policy
-                </h4>
-                <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• 7-day easy return policy</li>
-                  <li>• Free returns for defective products</li>
-                  <li>• Tags must be attached for returns</li>
-                  <li>• Refund processed within 5-7 business days</li>
-                  <li>• Exchange available for size/fit issues</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Reviews */}
-          <div>
-            <h3 className="text-xl font-semibold mb-6">Customer Reviews ({reviews.length})</h3>
-            <div className="space-y-6">
-              {reviews.map((review) => (
-                <div key={review.id} className="border border-border rounded-lg p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h4 className="font-medium">{review.name}</h4>
-                      <div className="flex items-center mt-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < review.rating
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-muted-foreground'
-                            }`}
-                          />
-                        ))}
-                      </div>
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">Product Information</h2>
+          
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            {/* Product Details */}
+            <AccordionItem value="details" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Product Details
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                  {Object.entries(product.productDetails).map(([key, value]) => (
+                    <div key={key} className="flex justify-between p-3 bg-muted/30 rounded-md">
+                      <span className="font-medium text-sm">{key}</span>
+                      <span className="text-muted-foreground text-sm">{value}</span>
                     </div>
-                    <span className="text-sm text-muted-foreground">{review.date}</span>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Size Guide */}
+            <AccordionItem value="size-guide" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Size Guide
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="pt-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse border border-border rounded-lg">
+                      <thead>
+                        <tr className="bg-muted/50">
+                          <th className="border border-border p-3 text-left">Size</th>
+                          <th className="border border-border p-3 text-left">Chest (inches)</th>
+                          <th className="border border-border p-3 text-left">Length (inches)</th>
+                          <th className="border border-border p-3 text-left">Shoulder (inches)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="border border-border p-3">XS</td><td className="border border-border p-3">34-36</td><td className="border border-border p-3">26</td><td className="border border-border p-3">16</td></tr>
+                        <tr className="bg-muted/25"><td className="border border-border p-3">S</td><td className="border border-border p-3">36-38</td><td className="border border-border p-3">27</td><td className="border border-border p-3">17</td></tr>
+                        <tr><td className="border border-border p-3">M</td><td className="border border-border p-3">38-40</td><td className="border border-border p-3">28</td><td className="border border-border p-3">18</td></tr>
+                        <tr className="bg-muted/25"><td className="border border-border p-3">L</td><td className="border border-border p-3">40-42</td><td className="border border-border p-3">29</td><td className="border border-border p-3">19</td></tr>
+                        <tr><td className="border border-border p-3">XL</td><td className="border border-border p-3">42-44</td><td className="border border-border p-3">30</td><td className="border border-border p-3">20</td></tr>
+                        <tr className="bg-muted/25"><td className="border border-border p-3">XXL</td><td className="border border-border p-3">44-46</td><td className="border border-border p-3">31</td><td className="border border-border p-3">21</td></tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <p className="text-muted-foreground mb-4">{review.comment}</p>
-                  {review.images.length > 0 && (
-                    <div className="flex space-x-2">
-                      {review.images.map((image, index) => (
-                        <img
-                          key={index}
-                          src={image}
-                          alt="Review"
-                          className="w-16 h-16 object-cover rounded-md border border-border"
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <p className="text-sm text-muted-foreground mt-4">
+                    💡 Tip: For the best fit, measure yourself and compare with our size chart. If you're between sizes, we recommend sizing up.
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Fabric & Care */}
+            <AccordionItem value="fabric-care" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Fabric & Care Instructions
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Fabric Features</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>• Premium 100% cotton fabric</li>
+                      <li>• Pre-shrunk for lasting fit</li>
+                      <li>• Breathable and moisture-wicking</li>
+                      <li>• Soft texture that improves with wash</li>
+                      <li>• Durable construction with reinforced seams</li>
+                      <li>• Fade-resistant colors</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Care Instructions</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>• Machine wash in cold water (30°C)</li>
+                      <li>• Use mild detergent, avoid bleach</li>
+                      <li>• Tumble dry on low heat or air dry</li>
+                      <li>• Iron on medium heat if needed</li>
+                      <li>• Do not dry clean</li>
+                      <li>• Wash dark colors separately</li>
+                    </ul>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Manufacturing & Specifications */}
+            <AccordionItem value="specifications" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Manufacturing & Specifications
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                  {Object.entries(product.specifications).map(([key, value]) => (
+                    <div key={key} className="flex justify-between p-3 bg-muted/30 rounded-md">
+                      <span className="font-medium text-sm">{key}</span>
+                      <span className="text-muted-foreground text-sm">{value}</span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Delivery & Returns */}
+            <AccordionItem value="delivery-returns" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Delivery & Returns
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                  <div className="p-4 bg-muted/30 rounded-lg">
+                    <h4 className="font-medium mb-3 flex items-center">
+                      <Truck className="w-5 h-5 mr-2 text-primary" />
+                      Delivery Information
+                    </h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>• Free delivery on orders above ₹499</li>
+                      <li>• Standard delivery: 3-5 business days</li>
+                      <li>• Express delivery: 1-2 business days (₹99)</li>
+                      <li>• Same day delivery available in select cities</li>
+                      <li>• Cash on delivery available</li>
+                      <li>• Order tracking available</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 bg-muted/30 rounded-lg">
+                    <h4 className="font-medium mb-3 flex items-center">
+                      <RotateCcw className="w-5 h-5 mr-2 text-primary" />
+                      Return Policy
+                    </h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>• 7-day easy return policy</li>
+                      <li>• Free returns for defective products</li>
+                      <li>• Tags must be attached for returns</li>
+                      <li>• Refund processed within 5-7 business days</li>
+                      <li>• Exchange available for size/fit issues</li>
+                      <li>• Return pickup available</li>
+                    </ul>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Customer Reviews */}
+            <AccordionItem value="reviews" className="border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Customer Reviews ({reviews.length})
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-6 pt-4">
+                  {reviews.map((review) => (
+                    <div key={review.id} className="border border-border rounded-lg p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className="font-medium">{review.name}</h4>
+                          <div className="flex items-center mt-1">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < review.rating
+                                    ? 'fill-yellow-400 text-yellow-400'
+                                    : 'text-muted-foreground'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <span className="text-sm text-muted-foreground">{review.date}</span>
+                      </div>
+                      <p className="text-muted-foreground text-sm mb-3">{review.comment}</p>
+                      {review.images.length > 0 && (
+                        <div className="flex space-x-2">
+                          {review.images.map((image, index) => (
+                            <img
+                              key={index}
+                              src={image}
+                              alt="Review"
+                              className="w-16 h-16 object-cover rounded-md border border-border"
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
