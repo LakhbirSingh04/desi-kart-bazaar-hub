@@ -12,7 +12,6 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
-  const [activeTab, setActiveTab] = useState('description');
   
   const productId = parseInt(id || '1');
   const isWishlisted = isInWishlist(productId);
@@ -38,10 +37,6 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!selectedSize) {
       alert('Please select a size');
-      return;
-    }
-    if (!selectedColor) {
-      alert('Please select a color');
       return;
     }
     
@@ -210,20 +205,6 @@ const ProductDetail = () => {
               </p>
             </div>
 
-            {/* Stock Status */}
-            <div className="mb-6">
-              {product.inStock ? (
-                <div className="flex items-center text-success">
-                  <div className="w-2 h-2 bg-success rounded-full mr-2"></div>
-                  <span>In Stock ({product.stockCount} available)</span>
-                </div>
-              ) : (
-                <div className="flex items-center text-destructive">
-                  <div className="w-2 h-2 bg-destructive rounded-full mr-2"></div>
-                  <span>Out of Stock</span>
-                </div>
-              )}
-            </div>
 
             {/* Size Selector */}
             <div className="mb-6">
@@ -243,23 +224,6 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Color Selector */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Color</label>
-              <div className="flex flex-wrap gap-2">
-                {product.colors.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 border border-border rounded-md hover:bg-muted transition-colors ${
-                      selectedColor === color ? 'bg-foreground text-background' : ''
-                    }`}
-                  >
-                    {color}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* Quantity Selector */}
             <div className="mb-6">
@@ -320,85 +284,153 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* Tabs Section */}
-        <div className="mt-16">
-          <div className="border-b border-border">
-            <nav className="flex space-x-8">
-              {['description', 'specifications', 'reviews'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm capitalize ${
-                    activeTab === tab
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {tab}
-                </button>
+        {/* Product Details Section */}
+        <div className="mt-16 space-y-12">
+          {/* Description & Specifications */}
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Product Details</h2>
+            <div className="prose max-w-none mb-8">
+              <p className="text-muted-foreground leading-relaxed text-lg">
+                {product.description}
+              </p>
+            </div>
+            
+            <h3 className="text-xl font-semibold mb-4">Specifications</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              {Object.entries(product.specifications).map(([key, value]) => (
+                <div key={key} className="flex justify-between p-4 bg-muted/50 rounded-lg">
+                  <span className="font-medium">{key}</span>
+                  <span className="text-muted-foreground">{value}</span>
+                </div>
               ))}
-            </nav>
+            </div>
           </div>
 
-          <div className="py-8">
-            {activeTab === 'description' && (
-              <div className="prose max-w-none">
-                <p className="text-muted-foreground leading-relaxed">
-                  {product.description}
-                </p>
-              </div>
-            )}
+          {/* Size Guide */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Size Guide</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-border rounded-lg">
+                <thead>
+                  <tr className="bg-muted/50">
+                    <th className="border border-border p-3 text-left">Size</th>
+                    <th className="border border-border p-3 text-left">Chest (inches)</th>
+                    <th className="border border-border p-3 text-left">Length (inches)</th>
+                    <th className="border border-border p-3 text-left">Shoulder (inches)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border border-border p-3">XS</td><td className="border border-border p-3">34-36</td><td className="border border-border p-3">26</td><td className="border border-border p-3">16</td></tr>
+                  <tr className="bg-muted/25"><td className="border border-border p-3">S</td><td className="border border-border p-3">36-38</td><td className="border border-border p-3">27</td><td className="border border-border p-3">17</td></tr>
+                  <tr><td className="border border-border p-3">M</td><td className="border border-border p-3">38-40</td><td className="border border-border p-3">28</td><td className="border border-border p-3">18</td></tr>
+                  <tr className="bg-muted/25"><td className="border border-border p-3">L</td><td className="border border-border p-3">40-42</td><td className="border border-border p-3">29</td><td className="border border-border p-3">19</td></tr>
+                  <tr><td className="border border-border p-3">XL</td><td className="border border-border p-3">42-44</td><td className="border border-border p-3">30</td><td className="border border-border p-3">20</td></tr>
+                  <tr className="bg-muted/25"><td className="border border-border p-3">XXL</td><td className="border border-border p-3">44-46</td><td className="border border-border p-3">31</td><td className="border border-border p-3">21</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-            {activeTab === 'specifications' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {Object.entries(product.specifications).map(([key, value]) => (
-                  <div key={key} className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                    <span className="font-medium">{key}</span>
-                    <span className="text-muted-foreground">{value}</span>
-                  </div>
-                ))}
+          {/* Fabric & Care */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Fabric & Care</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h4 className="font-medium">Fabric Details</h4>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Premium 100% cotton fabric</li>
+                  <li>• Pre-shrunk for lasting fit</li>
+                  <li>• Breathable and moisture-wicking</li>
+                  <li>• Soft texture that improves with wash</li>
+                  <li>• Durable construction with reinforced seams</li>
+                </ul>
               </div>
-            )}
+              <div className="space-y-4">
+                <h4 className="font-medium">Care Instructions</h4>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Machine wash in cold water (30°C)</li>
+                  <li>• Use mild detergent, avoid bleach</li>
+                  <li>• Tumble dry on low heat or air dry</li>
+                  <li>• Iron on medium heat if needed</li>
+                  <li>• Do not dry clean</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-            {activeTab === 'reviews' && (
-              <div className="space-y-6">
-                {reviews.map((review) => (
-                  <div key={review.id} className="border border-border rounded-lg p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="font-medium">{review.name}</h4>
-                        <div className="flex items-center mt-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${
-                                i < review.rating
-                                  ? 'fill-yellow-400 text-yellow-400'
-                                  : 'text-muted-foreground'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <span className="text-sm text-muted-foreground">{review.date}</span>
-                    </div>
-                    <p className="text-muted-foreground mb-4">{review.comment}</p>
-                    {review.images.length > 0 && (
-                      <div className="flex space-x-2">
-                        {review.images.map((image, index) => (
-                          <img
-                            key={index}
-                            src={image}
-                            alt="Review"
-                            className="w-16 h-16 object-cover rounded-md border border-border"
+          {/* Delivery & Returns */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Delivery & Returns</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-6 bg-muted/30 rounded-lg">
+                <h4 className="font-medium mb-3 flex items-center">
+                  <Truck className="w-5 h-5 mr-2 text-primary" />
+                  Delivery Information
+                </h4>
+                <ul className="space-y-2 text-muted-foreground text-sm">
+                  <li>• Free delivery on orders above ₹499</li>
+                  <li>• Standard delivery: 3-5 business days</li>
+                  <li>• Express delivery: 1-2 business days (₹99)</li>
+                  <li>• Same day delivery available in select cities</li>
+                  <li>• Cash on delivery available</li>
+                </ul>
+              </div>
+              <div className="p-6 bg-muted/30 rounded-lg">
+                <h4 className="font-medium mb-3 flex items-center">
+                  <RotateCcw className="w-5 h-5 mr-2 text-primary" />
+                  Return Policy
+                </h4>
+                <ul className="space-y-2 text-muted-foreground text-sm">
+                  <li>• 7-day easy return policy</li>
+                  <li>• Free returns for defective products</li>
+                  <li>• Tags must be attached for returns</li>
+                  <li>• Refund processed within 5-7 business days</li>
+                  <li>• Exchange available for size/fit issues</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Reviews */}
+          <div>
+            <h3 className="text-xl font-semibold mb-6">Customer Reviews ({reviews.length})</h3>
+            <div className="space-y-6">
+              {reviews.map((review) => (
+                <div key={review.id} className="border border-border rounded-lg p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium">{review.name}</h4>
+                      <div className="flex items-center mt-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < review.rating
+                                ? 'fill-yellow-400 text-yellow-400'
+                                : 'text-muted-foreground'
+                            }`}
                           />
                         ))}
                       </div>
-                    )}
+                    </div>
+                    <span className="text-sm text-muted-foreground">{review.date}</span>
                   </div>
-                ))}
-              </div>
-            )}
+                  <p className="text-muted-foreground mb-4">{review.comment}</p>
+                  {review.images.length > 0 && (
+                    <div className="flex space-x-2">
+                      {review.images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt="Review"
+                          className="w-16 h-16 object-cover rounded-md border border-border"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
